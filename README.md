@@ -1,6 +1,13 @@
 
+#### Installation
+
+```
+pip install bp
+```
 
 ```python
+import bp
+
 bp.encode(obj, encoding="utf-8", errors="strict") -> bytes
 bp.decode(buf, encoding="utf-8", errors="strict") -> obj
 

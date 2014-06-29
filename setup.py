@@ -1,8 +1,8 @@
 from setuptools import setup, find_packages
 
 setup(
-    name = 'binpack',
-    version = '0.0.1',
+    name = 'bp',
+    version = '0.0.4',
     keywords = ('binpack'),
     description = 'Binpack implementation for python',
     license = 'MIT License',
