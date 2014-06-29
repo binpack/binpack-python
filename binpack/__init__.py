@@ -240,6 +240,8 @@ except ImportError:
         return out.getvalue()
 
     def decode(buf, encoding=default_encoding, errors="strict"):
+        if not buf:
+            return False
         input = _BinIO(buf)
         x = _uk_one(input, encoding, errors)
         return x
@@ -272,14 +274,12 @@ except ImportError:
         result.insert(0, input.tell())
         return tuple(result)
 
-
 if sys.hexversion >= 0x3000000:
     _meta_bs = bytes('^~`;[]{}\x7f\xff', "latin1")
     _meta_ss = '^~`;[]{}\x7f\xff'
 else:
     _meta_bs = '^~`;[]{}\x7f\xff'
     _meta_ss = '^~`;[]{}\x7f\xff'
-
 
 def _escape_bs_blob(out, x):
     for i in x:
@@ -407,17 +407,3 @@ def textify(x, encoding=default_encoding, errors="strict"):
     out = _StrIO()
     _print_one(out, x, encoding, errors)
     return out.getvalue()
-
-
-if __name__ == '__main__':
-    a = (0, -111, 22222, -1.0/3, float("-inf"), [4, 5], {'haha': True, 'hoho': None})
-    s = pack(a)
-    x = unpack(s, 0, 9)
-
-    a = [1]
-    print(type(a))
-    bf = encode(a)
-
-    o = decode(bf)
-    print(len(bf), textify(bf))
-    print(o)
